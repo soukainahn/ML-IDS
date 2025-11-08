@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Intrusion Detection System</title>
+    <style>
+        /* General page style */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 40px 50px;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            width: 450px;
+            text-align: center;
+            backdrop-filter: blur(8px);
+        }
+
+        h1 {
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            color: #E0E8F0;
+            letter-spacing: 1px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        label {
+            text-align: left;
+            font-weight: 500;
+            color: #D6E0E7;
+        }
+
+        input, select {
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            background-color: rgba(255,255,255,0.15);
+            color: white;
+            outline: none;
+            transition: background 0.3s;
+        }
+
+        input:focus, select:focus {
+            background-color: rgba(255,255,255,0.25);
+        }
+
+        button {
+            background: #00B4DB;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #0083B0;
+            transform: scale(1.03);
+        }
+
+        .result {
+            margin-top: 25px;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: 600;
+            text-align: center;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .attack {
+            background: rgba(255, 50, 50, 0.15);
+            color: #FF6B6B;
+        }
+
+        .normal {
+            background: rgba(50, 255, 100, 0.15);
+            color: #4EEC9A;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        footer {
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: #AAB6C3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AI-Powered Intrusion Detection</h1>
+        <form action="/predict" method="POST">
+            <label>Duration (sec)</label>
+            <input type="number" name="dur" step="0.01" required>
+
+            <label>Protocol</label>
+            <select name="proto">
+                <option value="tcp">TCP</option>
+                <option value="udp">UDP</option>
+                <option value="icmp">ICMP</option>
+            </select>
+
+            <label>Service</label>
+            <select name="service">
+                <option value="http">HTTP</option>
+                <option value="ftp">FTP</option>
+                <option value="smtp">SMTP</option>
+                <option value="dns">DNS</option>
+            </select>
+
+            <label>State</label>
+            <select name="state">
+                <option value="FIN">FIN</option>
+                <option value="CON">CON</option>
+                <option value="INT">INT</option>
+            </select>
+
+            <label>Source Packets</label>
+            <input type="number" name="spkts" required>
+
+            <label>Destination Packets</label>
+            <input type="number" name="dpkts" required>
+
+            <label>Source Bytes</label>
+            <input type="number" name="sbytes" required>
+
+            <label>Destination Bytes</label>
+            <input type="number" name="dbytes" required>
+
+            <label>Source TTL</label>
+            <input type="number" name="sttl" required>
+
+            <label>Destination TTL</label>
+            <input type="number" name="dttl" required>
+
+            <button type="submit">Detect</button>
+        </form>
+
+        {% if prediction_text %}
+            <div class="result {% if 'Attack' in prediction_text %}attack{% else %}normal{% endif %}">
+                {{ prediction_text }}
+            </div>
+        {% endif %}
+
+        <footer>Cyber Defense Simulation © 2025</footer>
+    </div>
+</body>
+</html>
