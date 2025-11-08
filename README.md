@@ -8,7 +8,13 @@
 ![License](https://img.shields.io/badge/License-MIT-red)
 
 ---
+## Web App Demo
 
+Check out the ML-based Intrusion Detection System web interface:
+
+![ML-IDS Web App](assets/screenshot.png)
+
+This demo allows you to input network traffic features and see whether the system predicts normal traffic or an attack. It also provides the type of attack and other details based on the trained Random Forest model.
 ## 🔹 Overview
 
 This project implements a **Machine Learning-based Intrusion Detection System (IDS)** using the **UNSW-NB15 dataset**.
